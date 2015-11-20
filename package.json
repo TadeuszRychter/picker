@@ -1,0 +1,15 @@
+{
+  "name": "picker",
+  "version": "0.0.1",
+  "description": "demo of a configurator with live preview of a personalised product in AngularJS",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "author": "TR",
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-connect": "^2.2.0",
+    "gulp-util": "^3.0.7"
+  }
+}

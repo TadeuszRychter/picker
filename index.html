@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html ng-app="myApp" lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Demo live preview</title>
+<script type="text/javascript" src="jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="angular.min.js"></script>
+<script type="text/javascript" src='spectrum.js'></script>
+<script type="text/javascript" src="dropzone.js"></script>
+<script type="text/javascript" src="dropzoneDirective.js"></script>
+<script type="text/javascript" src="pickerDirective.js"></script>
+<script type="text/javascript" src="app.js"></script>
+
+<link rel="stylesheet" href="normalize.css">
+<link rel='stylesheet' href='spectrum.css' />
+<link rel="stylesheet" href="dropzone.css">
+<link rel="stylesheet" href="basic.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js"></script>
+<script>
+	WebFont.load({
+		google: {
+			families: ['Roboto:500,300,400']
+		},
+		active: function() {
+			if (typeof helpers !== 'undefined' && typeof helpers.resizeParentIframe !== 'undefined') {
+				helpers.resizeParentIframe();
+			}
+			if (typeof helpers !== 'undefined' && typeof helpers.resizeDropdown !== 'undefined') {
+				helpers.resizeDropdown();
+			}
+		}
+	});
+</script>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body ng-controller="myappCtrl">
+<div id="wrapper">
+
+	<div id="container" >
+
+		<p id="welcome" class="dontPrint">
+			This website is a demo to <a href="http://blog.fullystacked.it/live-preview-personalisation-configurator-angularjs/" title="Configurator with a live preview of a personalised product in AngularJS">an article</a>.
+		</p>
+
+		<div id="noJs">
+			Please activate JS to use this website properly.
+		</div>
+
+		<h3 class="dontPrint">1. Upload a logo.</h3>
+
+    <form id="drp" method="POST" action="/" enctype="multipart/form-data" class="dropzone dontPrint" dropzone="dropzoneConfig">
+	  <div class="fallback">
+	    <input name="image" type="file" />
+
+	    <button id="submitLogoFallback" class="clear btn" ng-click="submitLogo()">Send</button>
+	  </div>
+	</form>
+
+		<div id="chooseColors">
+			<h3 class="dontPrint">2. Choose colours.</h3>
+			<p class="dontPrint">
+
+			<div class="dontPrint" style="float:left">
+				<div id="firstWrapper" class="currentColor">
+					<p id="firstInfo">You are currently editing the primary colour.</p>
+					<button class="btn btn-default" ng-click="btnFirst()">Choose<br />1st colour</button>
+					<div class="previewWrapper"><div id="firstColorPreview" class="colorPreview" ng-style="{ 'background' : mypicker }"></div></div>
+					<input id="firstColor" type="text" pattern="[#][A-Fa-f0-9]{6}|[#][A-Fa-f0-9]{3}" ng-model="mypicker" ng-focus="editFirst()" placeholder="#ffffff" />
+				</div>
+
+				<button id="reverseColors" class="btn btn-default" ng-click="reverse()">&#x21f5; switch both colours</button>
+
+				<div id="secondWrapper" class="inactiveColor">
+					<p id="secondInfo">You are currently editing the secondary colour.</p>
+					<button class="btn btn-default" ng-click="btnSecond()">Choose<br />2nd colour</button>
+					<div class="previewWrapper"><div id="secondColorPreview" class="colorPreview" ng-style="{ 'background' : mypicker2 }"></div></div>
+					<input id="secondColor" type="text" pattern="[#][A-Fa-f0-9]{6}|[#][A-Fa-f0-9]{3}" ng-model="mypicker2" ng-focus="editSecond()" placeholder="#ffffff" />
+				</div>
+			</div>
+
+			<div class="dontPrint" style="float:left">
+				<picker id="firstPicker"  ng-model="mypicker" ></picker>
+				<picker id="secondPicker" ng-model="mypicker2" ></picker>
+			</div>
+
+			<button id="submit" class="clear btn btn-action btn-lg dontPrint" ng-click="submitAll()">Send</button>
+
+			<div id="colorsProgressBar" class="dontPrint">
+
+			<p id="colorsProgressBarLabel">Saving...</p>
+				<div id="noTrespassingOuterBarG">
+					<div id="noTrespassingFrontBarG" class="noTrespassingAnimationG">
+						<div class="noTrespassingBarLineG">
+						</div>
+						<div class="noTrespassingBarLineG">
+						</div>
+						<div class="noTrespassingBarLineG">
+						</div>
+						<div class="noTrespassingBarLineG">
+						</div>
+						<div class="noTrespassingBarLineG">
+						</div>
+						<div class="noTrespassingBarLineG">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div id="preview">
+			<h3><span class="dontPrint">3. </span>Preview</h3>
+		</div>
+
+		<div id="preview-template" style="display: none;">
+			<div class="dz-preview dz-file-preview">
+				<div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress></span></div>
+				<figure>
+					<img data-dz-thumbnail />
+				</figure>
+				<div class="dz-success-mark"><span>Logo saved successfully.</span></div>
+				<div class="dz-error-mark"><span>An error occured while saving the logo. Please contact us.</span></div>
+				<a class="dz-remove" data-dz-remove="" href="javascript:undefined;">Remove file.</a>
+			</div>
+
+		</div>
+
+	</div>
+</div>
+
+
+
+<div id="productWrapper">
+	<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 656.2 473.4" enable-background="new 0 0 656.2 473.4" xml:space="preserve">
+		<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="235.3772" y1="227.9228" x2="597.2662" y2="96.2059">
+			<stop  offset="0" style="stop-color:{{col2Lighter}}"/>
+			<stop  offset="1" style="stop-color:{{col2Darker}}"/>
+		</linearGradient>
+		<path fill-rule="evenodd" clip-rule="evenodd" fill="url(#SVGID_1_)" d="M344.9,347.7l310.9-90.9L457.3,0L176.9,67.3"/>
+		<linearGradient id="SVGID_2_" gradientUnits="userSpaceOnUse" x1="340.9372" y1="337.1429" x2="656.226" y2="337.1429">
+			<stop  offset="0" style="stop-color:{{col2Lighter}}"/>
+			<stop  offset="1" style="stop-color:{{col2}}"/>
+		</linearGradient>
+		<path fill-rule="evenodd" clip-rule="evenodd" fill="url(#SVGID_2_)" d="M340.9,417.4l302-94.8l13.3-65.8l-311.4,90.9"/>
+		<linearGradient id="SVGID_3_" gradientUnits="userSpaceOnUse" x1="-20.9695" y1="125.6159" x2="172.0013" y2="459.8511">
+			<stop  offset="0" style="stop-color:{{col1Lighter}}"/>
+			<stop  offset="1" style="stop-color:{{col1}}"/>
+		</linearGradient>
+		<path fill-rule="evenodd" clip-rule="evenodd" fill="url(#SVGID_3_)" d="M150.9,472v-65.8L0.1,113.4l4.4,70.2L151,472"/>
+		<linearGradient id="SVGID_4_" gradientUnits="userSpaceOnUse" x1="57.7961" y1="271.9192" x2="283.4552" y2="189.786">
+			<stop  offset="0" style="stop-color:{{col1Lighter}}"/>
+			<stop  offset="1" style="stop-color:{{col1Darker}}"/>
+		</linearGradient>
+		<path fill-rule="evenodd" clip-rule="evenodd" fill="url(#SVGID_4_)" d="M0,113.1C59,99.6,118.7,86,177.5,73.5
+			c54.1,92.8,108.7,184.6,163.8,275c-63.1,19.2-126.9,38.6-189.9,57.3C100.8,309.5,50.3,209.4,0,113.1L0,113.1L0,113.1z"/>
+		<linearGradient id="SVGID_5_" gradientUnits="userSpaceOnUse" x1="151.0436" y1="410.4871" x2="341.6865" y2="410.4871">
+			<stop  offset="0" style="stop-color:{{col1Lighter}}"/>
+			<stop  offset="1" style="stop-color:{{col1}}"/>
+		</linearGradient>
+		<path fill-rule="evenodd" clip-rule="evenodd" fill="url(#SVGID_5_)" d="M151,406.5L341.7,349l-3.5,62.3L151,472V406.5z"/>
+		<linearGradient id="SVGID_6_" gradientUnits="userSpaceOnUse" x1="164.3136" y1="74.5529" x2="356.7306" y2="407.829">
+			<stop  offset="0" style="stop-color:{{col2Lighter}}"/>
+			<stop  offset="1" style="stop-color:{{col2Darker}}"/>
+		</linearGradient>
+		<path fill-rule="evenodd" clip-rule="evenodd" fill="url(#SVGID_6_)" d="M340.9,416.9l3.9-69.2l-168-280.4v5.4l163.5,276l-4.4,62.9"
+			/>
+		<path fill-rule="evenodd" clip-rule="evenodd" fill="none" d="M150.9,473.4"/>
+	</svg>
+
+
+
+</div>
+
+<script type="text/javascript">
+console.log("js works");
+document.getElementById('noJs').style.display="none";
+
+if (window.location.href.lastIndexOf("/save") !== -1) {
+	var urlWithoutSave = window.location.href.substring(0, window.location.href.length-4);
+	window.location.replace(urlWithoutSave);
+}
+
+</script>
+
+</body>
+</html>
